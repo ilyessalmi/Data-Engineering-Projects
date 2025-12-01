@@ -33,20 +33,20 @@ Mon rôle a été d'auditer l'infrastructure existante, de comparer les fourniss
 graph LR
     subgraph On_Premise ["Infrastructure Actuelle (On-Premise)"]
         direction TB
-        ServerApp[17 VMs Application]
-        DB_SQL[SQL Server / MySQL]
-        NAS[NAS Stockage Fichiers]
-        IoT_Local[Serveur NodeJS Local]
-        Network_Local[MPLS & Fortigate FW]
+        ServerApp["17 VMs Application"]
+        DB_SQL["SQL Server / MySQL"]
+        NAS["NAS Stockage Fichiers"]
+        IoT_Local["Serveur NodeJS Local"]
+        Network_Local["MPLS & Fortigate FW"]
     end
 
     subgraph Azure_Target ["Cible : Azure Cloud Native"]
         direction TB
-        AKS[Azure Kubernetes Service (AKS)]
-        AzSQL[Azure SQL Database]
-        Blob[Azure Blob Storage]
-        IoTHub[Azure IoT Hub]
-        AzNet[Azure VNet + Azure Firewall]
+        AKS["Azure Kubernetes Service (AKS)"]
+        AzSQL["Azure SQL Database"]
+        Blob["Azure Blob Storage"]
+        IoTHub["Azure IoT Hub"]
+        AzNet["Azure VNet + Azure Firewall"]
     end
 
     ServerApp -->|Migration & Containerisation| AKS
@@ -57,3 +57,54 @@ graph LR
 
     style On_Premise fill:#f9f9f9,stroke:#333,stroke-width:2px
     style Azure_Target fill:#e6f7ff,stroke:#0078d4,stroke-width:2px
+```
+
+
+### 2. Audit de l'existant (On-Premise)
+L'infrastructure de départ souffrait de rigidité et de coûts de maintenance élevés :
+*   **Serveurs :** 24 VMs (Prod/Pré-prod) hébergées sur site.
+*   **Données :** Bases SQL Server, MySQL et fichiers sur NAS.
+*   **IoT :** Traitement local via serveur NodeJS (problème de scalabilité).
+*   **Réseau :** MPLS coûteux et Firewalls physiques.### 1. Audit de l'existant (On-Premise)
+L'infrastructure de départ souffrait de rigidité et de coûts de maintenance élevés :
+*   **Serveurs :** 24 VMs (Prod/Pré-prod) hébergées sur site.
+*   **Données :** Bases SQL Server, MySQL et fichiers sur NAS.
+*   **IoT :** Traitement local via serveur NodeJS (problème de scalabilité).
+*   **Réseau :** MPLS coûteux et Firewalls physiques.
+
+### 3. Solution Recommandée : Azure Cloud Native
+Au lieu de simplement copier les machines virtuelles (Lift & Shift), j'ai proposé une modernisation vers des services managés pour réduire la charge d'administration :
+
+| Composant | Solution On-Premise | Solution Azure Cible | Avantage Admin |
+| :--- | :--- | :--- | :--- |
+| **Compute** | 17 VMs Applications | **Azure Kubernetes (AKS)** | Orchestration et scalabilité auto. |
+| **Database** | SQL Server / MySQL | **Azure SQL Database** | Pas de gestion d'OS, backups auto. |
+| **Fichiers** | Serveur NAS | **Azure Blob Storage** | Stockage illimité, Tiering (Hot/Cold). |
+| **IoT** | Serveur NodeJS | **Azure IoT Hub** | Gestion de millions de messages/sec. |
+| **Sécurité** | Firewalls Physiques | **Azure Firewall + AD** | Sécurité périmétrique Cloud. |
+
+*(Voir le diagramme de flux ci-dessus pour la visualisation de la migration)*
+
+
+## 💰 Analyse FinOps et Résultats
+
+L'analyse financière a été réalisée via l'outil **Azure Pricing Calculator**.
+
+*   **Estimation Mensuelle :** Environ **$7,412.29**.
+*   **Optimisations proposées :**
+    *   Utilisation d'instances réservées (Reserved Instances) pour les nœuds AKS (-30% à -50%).
+    *   Mise en place de politiques de cycle de vie pour le stockage (Blob Storage Archive).
+    *   Dimensionnement précis des DTU pour les bases de données SQL.
+
+### Aperçu de l'estimation des coûts :
+
+![alt text](estimation-couts-azure.png)
+
+
+## 🚀 Ce que j'ai appris
+
+Ce projet m'a permis de sortir du code pur pour comprendre la **vision globale d'un système d'information**. J'ai appris à :
+1.  Traduire des besoins métiers (IoT, RH, Finance) en ressources techniques Azure.
+2.  Justifier le choix d'une architecture Cloud Native face à un Lift & Shift.
+3.  Utiliser les outils officiels de Microsoft pour chiffrer un projet de migration.
+4.  Intégrer les contraintes de sécurité (VPN, Azure AD) dès la phase de conception.
