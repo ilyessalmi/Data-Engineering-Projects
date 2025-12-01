@@ -31,32 +31,41 @@ Mon rôle a été d'auditer l'infrastructure existante, de comparer les fourniss
 
 ```mermaid
 graph LR
-    subgraph On_Premise ["Infrastructure Actuelle (On-Premise)"]
+    %% Styles Definitions
+    classDef azure fill:#0078D4,stroke:#004C87,stroke-width:2px,color:#fff,rx:5,ry:5;
+    classDef onprem fill:#666,stroke:#333,stroke-width:2px,color:#fff,rx:5,ry:5;
+    classDef migration fill:#fff,stroke:#999,stroke-width:1px,stroke-dasharray: 5 5,color:#333;
+
+    %% On-Premise Subgraph
+    subgraph On_Premise ["🏢 Infrastructure Actuelle (On-Premise)"]
         direction TB
-        ServerApp["17 VMs Application"]
-        DB_SQL["SQL Server / MySQL"]
-        NAS["NAS Stockage Fichiers"]
-        IoT_Local["Serveur NodeJS Local"]
-        Network_Local["MPLS & Fortigate FW"]
+        ServerApp["17 VMs Application"]:::onprem
+        DB_SQL["SQL Server / MySQL"]:::onprem
+        NAS["NAS Stockage Fichiers"]:::onprem
+        IoT_Local["Serveur NodeJS Local"]:::onprem
+        Network_Local["MPLS & Fortigate FW"]:::onprem
     end
 
-    subgraph Azure_Target ["Cible : Azure Cloud Native"]
+    %% Azure Subgraph
+    subgraph Azure_Target ["☁️ Cible : Azure Cloud Native"]
         direction TB
-        AKS["Azure Kubernetes Service (AKS)"]
-        AzSQL["Azure SQL Database"]
-        Blob["Azure Blob Storage"]
-        IoTHub["Azure IoT Hub"]
-        AzNet["Azure VNet + Azure Firewall"]
+        AKS["Azure Kubernetes Service (AKS)"]:::azure
+        AzSQL["Azure SQL Database"]:::azure
+        Blob["Azure Blob Storage"]:::azure
+        IoTHub["Azure IoT Hub"]:::azure
+        AzNet["Azure VNet + Azure Firewall"]:::azure
     end
 
+    %% Connections
     ServerApp -->|Migration & Containerisation| AKS
     DB_SQL -->|Migration PaaS| AzSQL
     NAS -->|Migration Données| Blob
     IoT_Local -->|Refonte IoT| IoTHub
     Network_Local -->|Sécurité Cloud| AzNet
 
-    style On_Premise fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style Azure_Target fill:#e6f7ff,stroke:#0078d4,stroke-width:2px
+    %% Subgraph Styling
+    style On_Premise fill:#f4f4f4,stroke:#666,stroke-width:2px,color:#333
+    style Azure_Target fill:#e6f7ff,stroke:#0078D4,stroke-width:2px,color:#0078D4
 ```
 
 
