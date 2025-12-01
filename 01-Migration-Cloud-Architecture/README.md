@@ -33,38 +33,33 @@ Mon rôle a été d'auditer l'infrastructure existante, de comparer les fourniss
 graph LR
     %% Styles Definitions
     classDef azure fill:#0078D4,stroke:#004C87,stroke-width:2px,color:#fff,rx:5,ry:5;
-    classDef onprem fill:#666,stroke:#333,stroke-width:2px,color:#fff,rx:5,ry:5;
-    classDef hidden width:0px,height:0px,stroke-width:0px,fill:transparent,color:transparent;
+    classDef onprem fill:#505050,stroke:#333,stroke-width:2px,color:#fff,rx:5,ry:5;
 
-    %% On-Premise Subgraph
+    %% On-Premise Column
     subgraph On_Premise ["🏢 Infrastructure Actuelle (On-Premise)"]
-        direction TB
-        Space1[ ]:::hidden
         ServerApp["17 VMs Application"]:::onprem
         DB_SQL["SQL Server / MySQL"]:::onprem
         NAS["NAS Stockage Fichiers"]:::onprem
         IoT_Local["Serveur NodeJS Local"]:::onprem
         Network_Local["MPLS & Fortigate FW"]:::onprem
         
-        %% Force order with spacer
-        Space1 ~~~ ServerApp ~~~ DB_SQL ~~~ NAS ~~~ IoT_Local ~~~ Network_Local
+        %% Force Vertical Stack with invisible links
+        ServerApp ~~~ DB_SQL ~~~ NAS ~~~ IoT_Local ~~~ Network_Local
     end
 
-    %% Azure Subgraph
+    %% Azure Column
     subgraph Azure_Target ["☁️ Cible : Azure Cloud Native"]
-        direction TB
-        Space2[ ]:::hidden
         AKS["Azure Kubernetes Service (AKS)"]:::azure
         AzSQL["Azure SQL Database"]:::azure
         Blob["Azure Blob Storage"]:::azure
         IoTHub["Azure IoT Hub"]:::azure
         AzNet["Azure VNet + Azure Firewall"]:::azure
 
-        %% Force order with spacer
-        Space2 ~~~ AKS ~~~ AzSQL ~~~ Blob ~~~ IoTHub ~~~ AzNet
+        %% Force Vertical Stack with invisible links
+        AKS ~~~ AzSQL ~~~ Blob ~~~ IoTHub ~~~ AzNet
     end
 
-    %% Connections
+    %% Real Connections (Left to Right)
     ServerApp -->|Migration & Containerisation| AKS
     DB_SQL -->|Migration PaaS| AzSQL
     NAS -->|Migration Données| Blob
