@@ -37,7 +37,7 @@ graph LR
     classDef migration fill:#fff,stroke:#999,stroke-width:1px,stroke-dasharray: 5 5,color:#333;
 
     %% On-Premise Subgraph
-    subgraph On_Premise ["🏢 Infrastructure Actuelle (On-Premise)"]
+    subgraph On_Premise ["🏢 On-Premise"]
         direction TB
         ServerApp["17 VMs Application"]:::onprem
         DB_SQL["SQL Server / MySQL"]:::onprem
@@ -47,7 +47,7 @@ graph LR
     end
 
     %% Azure Subgraph
-    subgraph Azure_Target ["☁️ Cible : Azure Cloud Native"]
+    subgraph Azure_Target ["☁️ Azure Cloud Native"]
         direction TB
         AKS["Azure Kubernetes Service (AKS)"]:::azure
         AzSQL["Azure SQL Database"]:::azure
