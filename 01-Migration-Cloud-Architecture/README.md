@@ -31,53 +31,39 @@ Mon rôle a été d'auditer l'infrastructure existante, de comparer les fourniss
 
 ```mermaid
 graph LR
-    %% Define Styles
+    %% Styles Definitions
     classDef azure fill:#0078D4,stroke:#004C87,stroke-width:2px,color:#fff,rx:5,ry:5;
-    classDef onprem fill:#505050,stroke:#333,stroke-width:2px,color:#fff,rx:5,ry:5;
-    classDef hidden width:0px,height:0px,fill:none,stroke:none,color:transparent;
+    classDef onprem fill:#666,stroke:#333,stroke-width:2px,color:#fff,rx:5,ry:5;
+    classDef migration fill:#fff,stroke:#999,stroke-width:1px,stroke-dasharray: 5 5,color:#333;
 
-    %% LEFT COLUMN: ON-PREMISE
+    %% On-Premise Subgraph
     subgraph On_Premise ["🏢 Infrastructure Actuelle (On-Premise)"]
         direction TB
-        %% Invisible Spacer to push content down
-        Space1[ ]:::hidden
-        
-        %% Nodes
         ServerApp["17 VMs Application"]:::onprem
         DB_SQL["SQL Server / MySQL"]:::onprem
         NAS["NAS Stockage Fichiers"]:::onprem
         IoT_Local["Serveur NodeJS Local"]:::onprem
         Network_Local["MPLS & Fortigate FW"]:::onprem
-        
-        %% Vertical Stack inside the column
-        Space1 ~~~ ServerApp ~~~ DB_SQL ~~~ NAS ~~~ IoT_Local ~~~ Network_Local
     end
 
-    %% RIGHT COLUMN: AZURE
+    %% Azure Subgraph
     subgraph Azure_Target ["☁️ Cible : Azure Cloud Native"]
         direction TB
-        %% Invisible Spacer to push content down
-        Space2[ ]:::hidden
-
-        %% Nodes
         AKS["Azure Kubernetes Service (AKS)"]:::azure
         AzSQL["Azure SQL Database"]:::azure
         Blob["Azure Blob Storage"]:::azure
         IoTHub["Azure IoT Hub"]:::azure
         AzNet["Azure VNet + Azure Firewall"]:::azure
-
-        %% Vertical Stack inside the column
-        Space2 ~~~ AKS ~~~ AzSQL ~~~ Blob ~~~ IoTHub ~~~ AzNet
     end
 
-    %% MIGRATION LINKS (Left to Right)
-    ServerApp -->|Migration| AKS
-    DB_SQL -->|Migration| AzSQL
-    NAS -->|Migration| Blob
-    IoT_Local -->|Refonte| IoTHub
-    Network_Local -->|Sécurité| AzNet
+    %% Connections
+    ServerApp -->|Migration & Containerisation| AKS
+    DB_SQL -->|Migration PaaS| AzSQL
+    NAS -->|Migration Données| Blob
+    IoT_Local -->|Refonte IoT| IoTHub
+    Network_Local -->|Sécurité Cloud| AzNet
 
-    %% Subgraph Background Colors
+    %% Subgraph Styling
     style On_Premise fill:#f4f4f4,stroke:#666,stroke-width:2px,color:#333
     style Azure_Target fill:#e6f7ff,stroke:#0078D4,stroke-width:2px,color:#0078D4
 ```
