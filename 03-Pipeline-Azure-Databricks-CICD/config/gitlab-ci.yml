@@ -1,0 +1,31 @@
+stages:
+  - test
+  - selenium
+  - deploy
+
+test:
+  stage: test
+  image: python:3.8
+  script:
+    - pip install -r requirements.txt
+    - pytest
+
+selenium:
+  stage: selenium
+  image: selenium/standalone-chrome
+  services:
+    - selenium/standalone-chrome
+  before_script:
+    - apt-get update
+    - apt-get install -y wget unzip
+    - wget -q https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+    - unzip chromedriver_linux64.zip -d /usr/local/bin/
+    - rm chromedriver_linux64.zip
+  script:
+    - pip install -r requirements.txt
+    - python test_ui.py
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deployment completed"
