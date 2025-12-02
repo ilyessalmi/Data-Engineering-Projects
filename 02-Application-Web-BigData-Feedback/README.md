@@ -45,7 +45,7 @@ graph TD
 
 ## 💻 Détails Techniques et Configuration
 
-1. Backend Python (Intégration HDFS)
+### 1. Backend Python (Intégration HDFS)
 Le défi principal était de permettre à Python d'écrire dans un système de fichiers distribué (HDFS) sans passer par des commandes système locales, mais via le réseau. J'ai utilisé le client pywebhdfs pour interagir avec le NameNode.
 
 Extrait : Logique d'écriture et gestion d'erreurs
@@ -65,10 +65,10 @@ except Exception as e:
     flash("Erreur serveur de stockage. Veuillez réessayer.", "danger")
 ```
     
-2. Conteneurisation (Docker)
+### 2. Conteneurisation (Docker)
 L'application web est conteneurisée pour garantir la portabilité et faciliter le déploiement.
 Dockerfile utilisé :
-```docker
+```dockerfile
 FROM python:3.12
 WORKDIR /app
 # Installation des dépendances
@@ -82,12 +82,10 @@ EXPOSE 5000
 CMD ["python", "app.py"]
 ```
 
-3. Pipeline Big Data
-HDFS : Stockage distribué des fichiers .csv bruts.
-
-Apache Hive : Utilisation de Tables Externes pour appliquer un schéma SQL sur les données brutes de HDFS, permettant des requêtes d'analyse rapides.
-
-Scala (MapReduce) : Utilisation pour des jobs d'analyse de sentiment plus complexes sur le corpus de feedback.
+### 3. Pipeline Big Data
+* HDFS : Stockage distribué des fichiers .csv bruts.
+* Apache Hive : Utilisation de Tables Externes pour appliquer un schéma SQL sur les données brutes de HDFS, permettant des requêtes d'analyse rapides.
+* Scala (MapReduce) : Utilisation pour des jobs d'analyse de sentiment plus complexes sur le corpus de feedback.
 
 ## 🔧 Troubleshooting et Résolution de Problèmes
 En tant qu'administrateur de cette stack, j'ai dû résoudre plusieurs incidents techniques majeurs durant le projet :
@@ -110,27 +108,27 @@ En tant qu'administrateur de cette stack, j'ai dû résoudre plusieurs incidents
 ### 1. Interface Web Utilisateur
 Le point d'entrée pour les utilisateurs.
 
-![alt text](web-interface.png)
+![alt text](web-interface.jpg)
 
 ### 2. Gestion du Cluster Hadoop
 Vérification des fichiers stockés directement dans l'interface HDFS.
 
-![alt text](hadoop-cluster.png)
+![alt text](hadoop-cluster.jpg)
 
 ### 3. Exécution des requêtes Hive
 Traitement des données via terminal SQL-like.
 
-![alt text](hive-terminal.png)
+![alt text](hive-terminal.jpg)
 
 ### 4. Déploiement Docker
 Vérification du build et du run de l'image.
 
-![alt text](docker-deploy.png)
+![alt text](docker-deploy.jpg)
 
 ### 5. Test E2E avec Cypress
 Mise en place de tests E2E avec Cypress pour valider la stabilité de l'application avant déploiement.
 
-![alt text](test-E2E-cypress.png)
+![alt text](test-E2E-cypress.jpg)
 
 ---
 
