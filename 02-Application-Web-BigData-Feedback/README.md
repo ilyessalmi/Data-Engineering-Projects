@@ -22,19 +22,19 @@ graph TD
 
     subgraph Docker_Container ["🐳 Conteneur Docker (Application)"]
         User((Utilisateur))
-        WebApp[Interface Web HTML/JS]:::web
-        Backend[API Flask Python]:::web
+        WebApp["Interface Web HTML/JS"]:::web
+        Backend["API Flask Python"]:::web
     end
 
     subgraph BigData_Ecosystem ["🐘 Écosystème Hadoop Local"]
-        HDFS[HDFS Stockage Distribué]:::storage
-        Hive[Apache Hive SQL]:::data
-        Scala[MapReduce Scala Analysis]:::data
+        HDFS["HDFS Stockage Distribué"]:::storage
+        Hive["Apache Hive SQL"]:::data
+        Scala["MapReduce Scala Analysis"]:::data
     end
 
     User -->|Soumet Feedback| WebApp
-    WebApp -->|POST Request (Port 5000)| Backend
-    Backend -->|Écriture fichier via WebHDFS (Port 9870)| HDFS
+    WebApp -->|POST Request - Port 5000| Backend
+    Backend -->|Écriture fichier via WebHDFS - Port 9870| HDFS
     Hive -->|Mapping Table Externe| HDFS
     Scala -->|Job Analyse Sentiment| HDFS
     Backend -.->|Lecture Insights| Hive
