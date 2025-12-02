@@ -8,6 +8,7 @@ Ce projet "Capstone" représente une **intégration système complète**. L'obje
 
 Ce n'est pas seulement un projet de développement, mais un **défi d'architecture système**. Il a fallu interconnecter des environnements hétérogènes (Web App légère vs Infrastructure Hadoop lourde), gérer les réseaux Docker et orchestrer des flux de données automatisés.
 
+
 ## 🛠 Architecture et Flux de Données
 
 L'architecture repose sur une communication entre un conteneur applicatif et un cluster de données local.
@@ -43,6 +44,7 @@ graph TD
     style Docker_Container fill:#f9f9f9,stroke:#666,color:#000
     style BigData_Ecosystem fill:#e6f7ff,stroke:#0078D4,color:#000
 ```
+
 
 ## 💻 Détails Techniques et Configuration
 
@@ -88,6 +90,7 @@ CMD ["python", "app.py"]
 * Apache Hive : Utilisation de Tables Externes pour appliquer un schéma SQL sur les données brutes de HDFS, permettant des requêtes d'analyse rapides.
 * Scala (MapReduce) : Utilisation pour des jobs d'analyse de sentiment plus complexes sur le corpus de feedback.
 
+
 ## 🔧 Troubleshooting et Résolution de Problèmes
 En tant qu'administrateur de cette stack, j'ai dû résoudre plusieurs incidents techniques majeurs durant le projet :
 
@@ -105,33 +108,40 @@ En tant qu'administrateur de cette stack, j'ai dû résoudre plusieurs incidents
 * Cause : Incompatibilité entre les bibliothèques guava de Hadoop et celles de Hive.
 * Résolution : Localisation des JARs conflictuels et remplacement manuel des fichiers .jar pour uniformiser les versions.
 
+
 ## 📸 Aperçu de l'Infrastructure
 ### 1. Interface Web Utilisateur
 Le point d'entrée pour les utilisateurs.
 
 ![alt text](web-interface.jpg)
 
+
 ### 2. Gestion du Cluster Hadoop
 Vérification des fichiers stockés directement dans l'interface HDFS.
 
 ![alt text](hadoop-cluster.jpg)
+
 
 ### 3. Exécution des requêtes Hive
 Traitement des données via terminal SQL-like.
 
 ![alt text](hive-terminal.jpg)
 
+
 ### 4. Déploiement Docker
 Vérification du build et du run de l'image.
 
 ![alt text](docker-deploy.jpg)
+
 
 ### 5. Test E2E avec Cypress
 Mise en place de tests E2E avec Cypress pour valider la stabilité de l'application avant déploiement.
 
 ![alt text](test-E2E-cypress.jpg)
 
+
 ---
+
 
 ## 🚀 Bilan : Compétences SysAdmin / Cloud
 Ce projet a renforcé mes compétences en :
