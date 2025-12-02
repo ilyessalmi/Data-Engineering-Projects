@@ -109,22 +109,27 @@ En tant qu'administrateur de cette stack, j'ai dû résoudre plusieurs incidents
 ## 📸 Aperçu de l'Infrastructure
 ### 1. Interface Web Utilisateur
 Le point d'entrée pour les utilisateurs.
+
 ![alt text](web-interface.png)
 
 ### 2. Gestion du Cluster Hadoop
 Vérification des fichiers stockés directement dans l'interface HDFS.
+
 ![alt text](hadoop-cluster.png)
 
 ### 3. Exécution des requêtes Hive
 Traitement des données via terminal SQL-like.
+
 ![alt text](hive-terminal.png)
 
 ### 4. Déploiement Docker
 Vérification du build et du run de l'image.
+
 ![alt text](docker-deploy.png)
 
 ### 5. Test E2E avec Cypress
 Mise en place de tests E2E avec Cypress pour valider la stabilité de l'application avant déploiement.
+
 ![alt text](test-E2E-cypress.png)
 
 ---
