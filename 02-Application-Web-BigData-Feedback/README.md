@@ -68,7 +68,7 @@ except Exception as e:
 2. Conteneurisation (Docker)
 L'application web est conteneurisée pour garantir la portabilité et faciliter le déploiement.
 Dockerfile utilisé :
-```
+```docker
 FROM python:3.12
 WORKDIR /app
 # Installation des dépendances
@@ -92,19 +92,19 @@ Scala (MapReduce) : Utilisation pour des jobs d'analyse de sentiment plus comple
 ## 🔧 Troubleshooting et Résolution de Problèmes
 En tant qu'administrateur de cette stack, j'ai dû résoudre plusieurs incidents techniques majeurs durant le projet :
 
-🔴 Problème 1 : HDFS en "Safe Mode"
-*Symptôme : L'application Python plantait lors de l'écriture des fichiers. Erreur : NameNode is in safe mode.
-*Analyse : HDFS se met en protection s'il manque des DataNodes ou si l'espace disque est critique.
-*Résolution : Analyse des logs Hadoop, puis exécution de la commande d'admin : hdfs dfsadmin -safemode leave.
+### 🔴 Problème 1 : HDFS en "Safe Mode"
+* Symptôme : L'application Python plantait lors de l'écriture des fichiers. Erreur : NameNode is in safe mode.
+* Analyse : HDFS se met en protection s'il manque des DataNodes ou si l'espace disque est critique.
+* Résolution : Analyse des logs Hadoop, puis exécution de la commande d'admin : hdfs dfsadmin -safemode leave.
 
-🔴 Problème 2 : Conflits de Ports (Docker vs Localhost)
-*Symptôme : Le conteneur Docker n'arrivait pas à contacter le service Hadoop hébergé sur la machine hôte.
-*Résolution : Configuration du réseau Docker. Utilisation de host.docker.internal (ou --network host) pour permettre au conteneur de "voir" le port 9870 de la machine hôte.
+### 🔴 Problème 2 : Conflits de Ports (Docker vs Localhost)
+* Symptôme : Le conteneur Docker n'arrivait pas à contacter le service Hadoop hébergé sur la machine hôte.
+* Résolution : Configuration du réseau Docker. Utilisation de host.docker.internal (ou --network host) pour permettre au conteneur de " voir" le port 9870 de la machine hôte.
 
-🔴 Problème 3 : Versions Java (Hive vs Hadoop)
-*Symptôme : Hive refusait de démarrer (Stack Traces Java complexes).
-*Cause : Incompatibilité entre les bibliothèques guava de Hadoop et celles de Hive.
-*Résolution : Localisation des JARs conflictuels et remplacement manuel des fichiers .jar pour uniformiser les versions.
+### 🔴 Problème 3 : Versions Java (Hive vs Hadoop)
+* Symptôme : Hive refusait de démarrer (Stack Traces Java complexes).
+* Cause : Incompatibilité entre les bibliothèques guava de Hadoop et celles de Hive.
+* Résolution : Localisation des JARs conflictuels et remplacement manuel des fichiers .jar pour uniformiser les versions.
 
 ## 📸 Aperçu de l'Infrastructure
 ### 1. Interface Web Utilisateur
