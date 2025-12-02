@@ -39,8 +39,9 @@ graph TD
     Scala -->|Job Analyse Sentiment| HDFS
     Backend -.->|Lecture Insights| Hive
 
-    style Docker_Container fill:#f9f9f9,stroke:#666
-    style BigData_Ecosystem fill:#e6f7ff,stroke:#0078D4
+    %% Subgraph Styling - Added color:#000 (Black Text)
+    style Docker_Container fill:#f9f9f9,stroke:#666,color:#000
+    style BigData_Ecosystem fill:#e6f7ff,stroke:#0078D4,color:#000
 ```
 
 ## 💻 Détails Techniques et Configuration
