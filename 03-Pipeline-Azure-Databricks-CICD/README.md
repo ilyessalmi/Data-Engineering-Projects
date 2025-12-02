@@ -54,7 +54,9 @@ graph LR
     style Viz fill:#fff5f0,stroke:#F2C811,color:#000
 ```
 
-## 💻 Implémentation Data Engineering (Extraits de Code)
+
+## 💻 Implémentation Data Engineering
+
 ### 1. Ingestion de Données (Python & Tweepy)
 Développement d'un script d'extraction robuste gérant l'authentification et la pagination des résultats pour contourner les limitations de requêtes par défaut.
 ```python
@@ -69,6 +71,7 @@ def collect_tweets(query, max_results):
     # Logique de gestion des quotas et stockage CSV...
     return tweets
 ```
+
 ### 2. Prétraitement et Assainissement (Data Sanitization)
 Les données textuelles brutes nécessitent un nettoyage rigoureux avant analyse. Utilisation d'expressions régulières (Regex) pour normaliser le contenu.
 ```Python
@@ -80,6 +83,7 @@ def clean_tweet(tweet):
     tweet = re.sub(r'\@\w+|\#', '', tweet)
     return tweet
 ```
+
 ### 3. Analyse Distribuée avec Spark (NLP)
 Pour passer à l'échelle sur de gros volumes, l'analyse de sentiment est encapsulée dans une Spark UDF (User Defined Function), permettant d'exécuter du code Python sur les nœuds du cluster Spark.
 ```Python
@@ -99,7 +103,9 @@ sentiment_udf = udf(analyze_sentiment, StringType())
 df_final = df_clean.withColumn("sentiment", sentiment_udf(df_clean.Filtered_Tweet))
 ```
 
+
 ## ⚙️ Administration Cloud & DevOps
+
 ### 1. Pipeline CI/CD (GitLab)
 Automatisation du déploiement via un fichier .gitlab-ci.yml. Ce pipeline assure que chaque modification du code est testée avant d'être déployée sur l'environnement Databricks de production.
 ```Yaml
@@ -119,21 +125,33 @@ deploy_job:
   script:
     - databricks workspace import_dir . /Shared/TwitterProject --overwrite
 ```
+
 ### 2. Administration Cluster Azure
 * Configuration : Cluster Standard avec Runtime ML (Machine Learning) pour supporter les librairies NLTK/TextBlob.
 * FinOps : Mise en place d'une politique d'auto-termination (shutdown) après 20 minutes d'inactivité pour optimiser les coûts de consommation Azure.
 
+
+
 ## 📸 Résultats et Livrables
-### Orchestration du Workflow (Databricks Jobs)
+
+### 1. Orchestration du Workflow (Databricks Jobs)
 Vue de l'exécution séquentielle des tâches : Ingestion -> Préparation -> Analyse.
+
 ![alt text](databricks-run.png)
 
-### Configuration du Cluster Spark
+### 2. Configuration du Cluster Spark
 Paramétrage de l'infrastructure de calcul.
+
 ![alt text](databricks-cluster.png)
 
-### Dashboard Analytique (Power BI)
+### 3. Automatisation CI/CD
+Pipeline GitLab validant et déployant le code.
+
+![alt text](gitlab-pipeline.png)
+
+### 4. Dashboard Analytique (Power BI)
 Restitution visuelle des KPIs de sentiment et nuages de mots.
+
 ![alt text](powerbi-dashboard.png)
 
 ---
