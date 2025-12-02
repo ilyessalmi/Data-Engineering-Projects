@@ -157,6 +157,6 @@ Restitution visuelle des KPIs de sentiment et nuages de mots.
 ---
 
 ## 🚀 Compétences Acquises
-Ingénierie de Données : Manipulation avancée de DataFrames PySpark et nettoyage de données non structurées.
-Infrastructure as Code (IaC) : Compréhension des mécanismes de déploiement automatisé (CI/CD).
-Administration Azure : Gestion des ressources de calcul (Clusters), des secrets (API Keys) et de la connectivité (ODBC vers Power BI).
+* Ingénierie de Données : Manipulation avancée de DataFrames PySpark et nettoyage de données non structurées.
+* Infrastructure as Code (IaC) : Compréhension des mécanismes de déploiement automatisé (CI/CD).
+* Administration Azure : Gestion des ressources de calcul (Clusters), des secrets (API Keys) et de la connectivité (ODBC vers Power BI).
