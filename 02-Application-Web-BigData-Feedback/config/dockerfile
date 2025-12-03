@@ -1,32 +1,65 @@
+# -------------------------------------------
+# Image de base 
+# -------------------------------------------
 FROM python:3.12
 
+# -------------------------------------------
+# Métadonnées
+# -------------------------------------------
 LABEL maintainer="Ilyes"
 LABEL description="Application Flask pour les retours de formation"
 
+# -------------------------------------------
+# Variables d'environnement Flask
+# -------------------------------------------
 ENV FLASK_APP=app.py
-ENV FLASK_ENV=dev
+ENV FLASK_ENV=development   # mettre "production" pour un vrai déploiement
 
+# -------------------------------------------
+# Répertoire de travail dans le conteneur
+# -------------------------------------------
 WORKDIR /app
 
+# -------------------------------------------
+# Copie du fichier des dépendances en premier
+# (optimise le cache Docker)
+# -------------------------------------------
 COPY requirements.txt .
-COPY app app 
-COPY app.py .
 
+# Installation des dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
+# -------------------------------------------
+# Copie du code source de l'application
+# -------------------------------------------
+COPY app ./app
+COPY app.py .
+
+# -------------------------------------------
+# Création d'un utilisateur non-root
+# (bonne pratique de sécurité)
+# -------------------------------------------
 RUN useradd -ms /bin/bash appuser
 USER appuser
 
-# Exposer le port sur lequel l'application écoute
+# -------------------------------------------
+# Port exposé par l'application Flask
+# -------------------------------------------
 EXPOSE 5000
 
-# Définir la commande par défaut pour exécuter l'application
+# -------------------------------------------
+# Commande par défaut pour démarrer l'application
+# -------------------------------------------
 CMD ["python", "app.py"]
 
-
-### Commandes pour construire l'image Docker
-# docker build -t lepont-feedback .
-# docker run -p 5000:5000 lepont-feedback
-
-## vérification que l'application Flask s'exécute correctement dans le conteneur Docker
-# http://localhost:5000
+# -------------------------------------------
+# Commandes utiles (documentation)
+# -------------------------------------------
+# Construire l'image :
+#   docker build -t lepont-feedback .
+#
+# Lancer le conteneur :
+#   docker run -p 5000:5000 lepont-feedback
+#
+# Vérifier l'accès :
+#   http://localhost:5000
