@@ -1,7 +1,7 @@
 from azure.eventhub import EventHubConsumerClient
 
 # Configuration de l'Event Hub
-connection_str = "Endpoint=sb://crypto-market-namespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ThbCJx4joW72u6EXIHJUcWhOTKYldHEF++AEhN8zrqQ="
+connection_str = "Endpoint=sb://crypto-market-namespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ThbCJx4joW58u6ELIHJUoWhOTKYlaHEF++AEhN8zrqQ="
 event_hub_name = "crypto-market-data"
 consumer_group = "$Default"
 
@@ -29,4 +29,5 @@ except KeyboardInterrupt:
     print("Stopped receiving.")
 finally:
     # Fermer le client
+
     client.close()
