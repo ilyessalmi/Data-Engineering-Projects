@@ -28,8 +28,8 @@ graph TD
     end
 
     subgraph Ingestion ["1. Ingestion Serverless"]
-        AzFunc["Azure Function (Timer Trigger)"]:::ingest
-        EventHub["Azure Event Hubs (Kafka)"]:::ingest
+        AzFunc["Azure Function - Timer Trigger"]:::ingest
+        EventHub["Azure Event Hubs - Kafka"]:::ingest
     end
 
     subgraph Processing ["2. Traitement Temps Réel"]
@@ -38,7 +38,7 @@ graph TD
 
     subgraph Storage_Analyze ["3. Stockage & Analyse"]
         Synapse["Azure Synapse SQL Pool"]:::storage
-        Monitor["Azure Monitor (Alertes)"]:::storage
+        Monitor["Azure Monitor - Alertes"]:::storage
     end
 
     subgraph Viz ["4. Restitution"]
@@ -46,10 +46,10 @@ graph TD
     end
 
     %% Flux
-    API -->|JSON Request (5min)| AzFunc
+    API -->|JSON Request - 5min| AzFunc
     AzFunc -->|Push Data| EventHub
     EventHub -->|Ingest Stream| Stream
-    Stream -->|Calculs Fenêtrés (SQL)| Synapse
+    Stream -->|Calculs Fenêtrés SQL| Synapse
     Synapse -->|Direct Query| PBI
     Stream -.->|Condition Critique| Monitor
 
@@ -132,6 +132,12 @@ Pour documenter ce flux de données, j'ai connecté Azure Purview au compte Syna
 
 
 ## 📸 Aperçu de la Solution
+
+### Architecture de la Solution
+Vue détaillée de l'architecture Azure
+
+![alt text](azure-architecture.png)
+
 ### Azure function
 Azure Function déclenchée par un Timer Trigger pour interroger l'API CoinGecko
 
