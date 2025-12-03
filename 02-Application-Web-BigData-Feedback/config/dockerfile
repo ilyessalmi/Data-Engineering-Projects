@@ -1,0 +1,32 @@
+FROM python:3.12
+
+LABEL maintainer="Ilyes"
+LABEL description="Application Flask pour les retours de formation"
+
+ENV FLASK_APP=app.py
+ENV FLASK_ENV=dev
+
+WORKDIR /app
+
+COPY requirements.txt .
+COPY app app 
+COPY app.py .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN useradd -ms /bin/bash appuser
+USER appuser
+
+# Exposer le port sur lequel l'application écoute
+EXPOSE 5000
+
+# Définir la commande par défaut pour exécuter l'application
+CMD ["python", "app.py"]
+
+
+### Commandes pour construire l'image Docker
+# docker build -t lepont-feedback .
+# docker run -p 5000:5000 lepont-feedback
+
+## vérification que l'application Flask s'exécute correctement dans le conteneur Docker
+# http://localhost:5000
