@@ -1,0 +1,27 @@
+Ces commandes sont utilisées pour déployer et exécuter une application Scala compilée en JAR sur un cluster Hadoop, en utilisant YARN comme gestionnaire de ressources. L'objectif est de réaliser une analyse de sentiment sur un fichier CSV.
+
+
+
+# Copie le fichier JAR de l'application Scala compilée depuis le chemin local
+# vers le système de fichiers distribué Hadoop (HDFS) dans le répertoire /user/sentiment_analysis/.
+
+hdfs dfs -put target/scala-2.13/sentimentanalysis_2.13-1.0.jar /user/sentiment_analysis/  
+
+# Crée récursivement un répertoire pour les données d'entrée de l'application dans HDFS.
+# L'option -p garantit que tous les répertoires parents nécessaires sont également créés.
+
+hdfs dfs -mkdir -p /user/sentiment_analysis/input
+
+# Copie le fichier CSV contenant les retours (feedbacks) depuis le chemin local Windows
+# vers le répertoire d'entrée que nous venons de créer dans HDFS.
+
+hdfs dfs -put C:\Users\salmi\Desktop\feedbacks_yarn.csv /user/sentiment_analysis/input/ 
+
+# Exécute l'application JAR sur le cluster Hadoop en utilisant YARN comme gestionnaire de ressources.
+# - C:/hadoop/sbin/sentimentanalysis_2.13-1.0.jar : Chemin local vers le fichier JAR de l'application.
+# - com.lepont.sentiment.SentimentAnalysis : La classe principale de l'application à exécuter.
+# - hdfs:///user/sentiment_analysis/input : Premier argument de l'application (chemin HDFS des données d'entrée).
+# - hdfs:///user/sentiment_analysis/output : Deuxième argument de l'application (chemin HDFS où les résultats seront écrits).
+
+yarn jar C:/hadoop/sbin/sentimentanalysis_2.13-1.0.jar com.lepont.sentiment.SentimentAnalysis \
+hdfs:///user/sentiment_analysis/input hdfs:///user/sentiment_analysis/output
