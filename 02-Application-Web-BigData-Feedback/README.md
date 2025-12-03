@@ -119,6 +119,8 @@ Le point d'entrée pour les utilisateurs.
 
 ![alt text](web-interface.jpg)
 
+![alt text](liste_des_retours_flask.png)
+
 
 ### 2. Gestion du Cluster Hadoop
 Vérification des fichiers stockés directement dans l'interface HDFS.
