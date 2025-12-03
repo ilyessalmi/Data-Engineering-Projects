@@ -64,7 +64,7 @@ graph TD
 ## 💻 Implémentation Data Engineering
 ### 1. Ingestion Serverless (Python)
 J'ai développé une Azure Function déclenchée par un Timer Trigger (toutes les 5 minutes) pour interroger l'API CoinGecko. Le code est conçu pour être résilient aux pannes API.
-Voir le code complet : function_app.py
+* Voir le code complet : [function_app.py](./src)
 ```Python
 # Extrait de l'Azure Function
 @app.function_name(name="IngestCurrentCryptoData")
