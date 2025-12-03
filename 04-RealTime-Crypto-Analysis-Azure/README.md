@@ -22,6 +22,7 @@ graph TD
     classDef process fill:#E66C37,stroke:#fff,stroke-width:2px,color:#fff;
     classDef storage fill:#004C87,stroke:#fff,stroke-width:2px,color:#fff;
     classDef viz fill:#F2C811,stroke:#fff,stroke-width:2px,color:#000;
+    classDef gov fill:#9B4F96,stroke:#fff,stroke-width:2px,color:#fff;
 
     subgraph External ["Source de Données"]
         API["API CoinGecko"]:::source
@@ -41,25 +42,35 @@ graph TD
         Monitor["Azure Monitor - Alertes"]:::storage
     end
 
+    subgraph Governance ["5. Gouvernance & Catalogage"]
+        Purview["Microsoft Purview - Data Catalog"]:::gov
+    end
+
     subgraph Viz ["4. Restitution"]
         PBI["Power BI Dashboard"]:::viz
     end
 
-    %% Flux
+    %% Flux de Données
     API -->|JSON Request - 5min| AzFunc
     AzFunc -->|Push Data| EventHub
     EventHub -->|Ingest Stream| Stream
     Stream -->|Calculs Fenêtrés SQL| Synapse
     Synapse -->|Direct Query| PBI
     Stream -.->|Condition Critique| Monitor
+    
+    %% Flux de Gouvernance
+    Synapse -.->|Scan Metadata| Purview
 
-    %% Styling
+    %% Styling des groupes
     style External fill:#fff,stroke:#333,color:#000
     style Ingestion fill:#e6f7ff,stroke:#0078D4,color:#000
     style Processing fill:#fff5e6,stroke:#E66C37,color:#000
     style Storage_Analyze fill:#e6efff,stroke:#004C87,color:#000
     style Viz fill:#fff5f0,stroke:#F2C811,color:#000
+    style Governance fill:#fceeff,stroke:#9B4F96,color:#000
 ```
+
+---
 
 ## 💻 Implémentation Data Engineering
 ### 1. Ingestion Serverless (Python)
@@ -80,6 +91,7 @@ def ingest_current_crypto_data(myTimer: func.TimerRequest) -> None:
         logging.error(f"Erreur critique lors de l'ingestion: {e}")
 ```
 
+
 ### 2. Traitement de Flux (Stream Analytics SQL)
 Le cœur du traitement n'est pas en Python, mais en SQL Temporel. J'ai configuré un job Stream Analytics pour calculer des agrégats sur des fenêtres de temps glissantes (Tumbling Windows).
 Requête de transformation (Calcul de Moyennes et Volatilité) :
@@ -98,6 +110,9 @@ WHERE
     type = 'current'
 ```
 
+---
+
+
 ## ⚙️ Administration Cloud & Gouvernance
 Ce projet a nécessité une configuration fine des ressources Azure pour assurer la sécurité et la maîtrise des coûts.
 
@@ -105,16 +120,20 @@ Ce projet a nécessité une configuration fine des ressources Azure pour assurer
 * Event Hubs : Création d'un Namespace dédié avec partitionnement pour paralléliser l'ingestion si le volume augmente.
 * Synapse Analytics : Provisionnement d'un Pool SQL dédié (DW) pour stocker l'historique et permettre des requêtes analytiques complexes.
 
+
 ### 2. Monitoring & Alerting (Azure Monitor)
 En tant qu'Admin, j'ai mis en place une surveillance active pour réagir aux anomalies de marché sans regarder les écrans :
 
 * Règle d'alerte 1 : Si Bitcoin Price > 70,000$ → Envoi Email Équipe Trading.
 * Règle d'alerte 2 : Si Variation > 5% en 1h (Volatilité extrême) → Notification Critique.
 
+
 ### 3. Gouvernance des Données (Azure Purview)
 Pour documenter ce flux de données, j'ai connecté Azure Purview au compte Synapse. Cela permet de :
 * Scanner automatiquement le schéma des données.
 * Créer un catalogue de données (Data Catalog) pour que les analystes retrouvent facilement les tables CryptoIndicators.
+
+---
 
 ## 🔧 Défis Techniques & Résolutions (Troubleshooting)
 ### 🔴 Problème 1 : Latence et "Backpressure"
@@ -130,6 +149,7 @@ Pour documenter ce flux de données, j'ai connecté Azure Purview au compte Syna
 * Défi : Les Pools SQL dédiés coûtent cher s'ils tournent 24/7.
 * Solution FinOps : Mise en place d'un script d'automatisation pour "Pauser" le pool Synapse pendant les heures creuses (nuit/weekend) lors des phases de test.
 
+---
 
 ## 📸 Aperçu de la Solution
 
@@ -138,36 +158,44 @@ Vue détaillée de l'architecture Azure
 
 ![alt text](azure-architecture.png)
 
+
 ### Azure function
 Azure Function déclenchée par un Timer Trigger pour interroger l'API CoinGecko
 
 ![alt text](function_app.jpg)
 ![alt text](function_app1.jpg)
 
+
 ### Configuration Event Hubs (Ingestion)
 Point d'entrée des données streaming.
 
 ![alt text](eventhub-config.png)
+
 
 ### Logique de Traitement (Stream Analytics)
 Requête SQL temps réel directement dans le portail Azure.
 
 ![alt text](stream-analytics-query.png)
 
+
 ### Visualisation Power BI
 Comparaison temps réel Bitcoin vs Ethereum et moyennes mobiles.
 
 ![alt text](powerbi-crypto.png)
+
 
 ### Système d'Alerte
 Configuration des seuils critiques dans Azure Monitor.
 
 ![alt text](azure-monitor-alert.png)
 
+
 ###  Gouvernance des Données - Data Catalog
 Azure Purview (Data Catalog) a été configuré pour scanner et cataloguer les données.
 
 ![alt text](Azure_purview.png)
+
+---
 
 ## 🚀 Compétences Acquises
 * Architecture Serverless : Maîtrise des Azure Functions et des triggers événementiels.
