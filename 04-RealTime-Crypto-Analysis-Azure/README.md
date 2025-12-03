@@ -158,6 +158,11 @@ Configuration des seuils critiques dans Azure Monitor.
 
 ![alt text](azure-monitor-alert.png)
 
+###  Gouvernance des Données - Data Catalog
+Azure Purview (Data Catalog) a été configuré pour scanner et cataloguer les données.
+
+![alt text](Azure_purview.png)
+
 ## 🚀 Compétences Acquises
 * Architecture Serverless : Maîtrise des Azure Functions et des triggers événementiels.
 * Streaming Data : Compréhension des concepts de fenêtrage temporel avec Stream Analytics.
