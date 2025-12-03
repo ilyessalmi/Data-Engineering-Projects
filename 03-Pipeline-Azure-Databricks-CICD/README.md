@@ -61,7 +61,7 @@ graph TD
 ## 💻 Implémentation Data Engineering
 
 Les scripts complets sont disponibles dans ce dépôt : 
-- Code source : [03-Pipeline-Azure-Databricks-CICD/src](./03-Pipeline-Azure-Databricks-CICD/src)
+- Code source : [03-Pipeline-Azure-Databricks-CICD/src]
 - Fichiers de configuration : [03-Pipeline-Azure-Databricks-CICD/config](./03-Pipeline-Azure-Databricks-CICD/config)
 
 ### 1. Ingestion de Données (Python & Tweepy)
