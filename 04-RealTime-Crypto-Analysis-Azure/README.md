@@ -6,7 +6,7 @@
 
 Ce projet Capstone final vise à construire une architecture **100% Cloud Native (PaaS)** pour l'analyse en temps réel des cryptomonnaies (Bitcoin & Ethereum). Contrairement aux traitements par lots (Batch) classiques, ce projet traite les données "au fil de l'eau" (Streaming) pour permettre une réactivité immédiate.
 
-L'objectif était double :
+L'objectif était de :
 1.  **Architecture Cloud :** Interconnecter des services Azure managés (Functions, Event Hubs, Stream Analytics) de manière sécurisée et scalable.
 2.  **Data Intelligence :** Calculer des indicateurs financiers (Moyennes mobiles, Volatilité) en temps réel et générer des alertes critiques pour les traders.
 
