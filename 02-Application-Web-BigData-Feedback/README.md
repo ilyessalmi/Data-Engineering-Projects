@@ -48,6 +48,10 @@ graph TD
 
 ## 💻 Détails Techniques et Configuration
 
+Les scripts complets sont disponibles dans ce dépôt : 
+- Code source : [src](./src)
+- Fichiers de configuration : [config](./config)
+
 ### 1. Backend Python (Intégration HDFS)
 Le défi principal était de permettre à Python d'écrire dans un système de fichiers distribué (HDFS) sans passer par des commandes système locales, mais via le réseau. J'ai utilisé le client pywebhdfs pour interagir avec le NameNode.
 
