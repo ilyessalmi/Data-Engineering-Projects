@@ -1,4 +1,5 @@
-Ces commandes sont utilisées pour déployer et exécuter une application Scala compilée en JAR sur un cluster Hadoop, en utilisant YARN comme gestionnaire de ressources. L'objectif est de réaliser une analyse de sentiment sur un fichier CSV.
+# Ces commandes sont utilisées pour déployer et exécuter une application Scala compilée en JAR sur un cluster Hadoop,
+# en utilisant YARN comme gestionnaire de ressources. L'objectif est de réaliser une analyse de sentiment sur un fichier CSV.
 
 
 
