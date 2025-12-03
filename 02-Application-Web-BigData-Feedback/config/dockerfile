@@ -1,65 +1,44 @@
-# -------------------------------------------
-# Image de base 
-# -------------------------------------------
+# Image de base Python 3.12
 FROM python:3.12
 
-# -------------------------------------------
-# Métadonnées
-# -------------------------------------------
+# Mainteneur de l'image
 LABEL maintainer="Ilyes"
+# Description de l'application
 LABEL description="Application Flask pour les retours de formation"
 
-# -------------------------------------------
-# Variables d'environnement Flask
-# -------------------------------------------
+# Variable Flask : fichier principal
 ENV FLASK_APP=app.py
-ENV FLASK_ENV=development   # mettre "production" pour un vrai déploiement
+# Variable Flask : environnement de développement
+ENV FLASK_ENV=dev
 
-# -------------------------------------------
 # Répertoire de travail dans le conteneur
-# -------------------------------------------
 WORKDIR /app
 
-# -------------------------------------------
-# Copie du fichier des dépendances en premier
-# (optimise le cache Docker)
-# -------------------------------------------
+# Copie des dépendances
 COPY requirements.txt .
-
-# Installation des dépendances Python
-RUN pip install --no-cache-dir -r requirements.txt
-
-# -------------------------------------------
-# Copie du code source de l'application
-# -------------------------------------------
-COPY app ./app
+# Copie du dossier de l'application
+COPY app app
+# Copie du fichier principal
 COPY app.py .
 
-# -------------------------------------------
-# Création d'un utilisateur non-root
-# (bonne pratique de sécurité)
-# -------------------------------------------
+# Installation des dépendances (sans cache)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Création d'un utilisateur non-root pour la sécurité
 RUN useradd -ms /bin/bash appuser
+# Utilisation de l'utilisateur non-root
 USER appuser
 
-# -------------------------------------------
-# Port exposé par l'application Flask
-# -------------------------------------------
+# Port exposé par l'application
 EXPOSE 5000
 
-# -------------------------------------------
-# Commande par défaut pour démarrer l'application
-# -------------------------------------------
+# Commande de démarrage de l'application
 CMD ["python", "app.py"]
 
-# -------------------------------------------
-# Commandes utiles (documentation)
-# -------------------------------------------
-# Construire l'image :
-#   docker build -t lepont-feedback .
-#
-# Lancer le conteneur :
-#   docker run -p 5000:5000 lepont-feedback
-#
-# Vérifier l'accès :
-#   http://localhost:5000
+
+### Commandes pour construire l'image Docker
+# docker build -t lepont-feedback .
+# docker run -p 5000:5000 lepont-feedback
+
+## vérification que l'application Flask s'exécute correctement dans le conteneur Docker
+# http://localhost:5000
