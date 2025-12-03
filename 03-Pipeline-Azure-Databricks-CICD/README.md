@@ -15,34 +15,37 @@ Ce projet met en avant une double compétence :
 Le pipeline intègre des composants d'ingestion, de traitement massif et de reporting.
 
 ```mermaid
-graph LR
+graph TD
     %% Styles
     classDef source fill:#1DA1F2,stroke:#fff,stroke-width:2px,color:#fff,rx:5,ry:5;
     classDef azure fill:#0078D4,stroke:#fff,stroke-width:2px,color:#fff,rx:5,ry:5;
     classDef processing fill:#E25A1C,stroke:#fff,stroke-width:2px,color:#fff,rx:5,ry:5;
     classDef viz fill:#F2C811,stroke:#fff,stroke-width:2px,color:#000,rx:5,ry:5;
 
-    subgraph Source ["📡 Ingestion (Data Engineering)"]
+    subgraph Source ["📡 1. Ingestion (Data Engineering)"]
+        direction TB
         API["API Twitter v2"]:::source
         Script["Script Python (Tweepy)"]:::source
-        RawData["Stockage Brut (Raw)"]:::source
+        RawData["Stockage Brut (CSV)"]:::source
     end
 
-    subgraph Azure_Env ["☁️ Traitement Big Data (Spark/Databricks)"]
+    subgraph Azure_Env ["☁️ 2. Traitement Big Data (Spark/Databricks)"]
+        direction TB
         Clean["Data Sanitization (Regex)"]:::processing
         Token["Tokenization & Stop-words"]:::processing
         NLP["Analyse Sentiment (TextBlob)"]:::processing
         Parquet["Stockage Optimisé (Parquet)"]:::azure
     end
 
-    subgraph Viz ["📊 Business Intelligence"]
+    subgraph Viz ["📊 3. Business Intelligence"]
+        direction TB
         PBI["Power BI Dashboard"]:::viz
     end
 
     %% Flux
     API -->|Authentification Bearer| Script
     Script -->|Pagination & Quotas| RawData
-    RawData -->|Ingestion DBFS| Clean
+    RawData -->|Upload DBFS| Clean
     Clean -->|Transformation| Token
     Token -->|Spark UDF| NLP
     NLP -->|Écriture Distribuée| Parquet
@@ -57,35 +60,60 @@ graph LR
 
 ## 💻 Implémentation Data Engineering
 
+Les scripts complets sont disponibles dans ce dépôt : 
+- Code source : [03-Pipeline-Azure-Databricks-CICD/src](./03-Pipeline-Azure-Databricks-CICD/src)
+- Fichiers de configuration : [03-Pipeline-Azure-Databricks-CICD/config](./03-Pipeline-Azure-Databricks-CICD/config)
+
 ### 1. Ingestion de Données (Python & Tweepy)
-Développement d'un script d'extraction robuste gérant l'authentification et la pagination des résultats pour contourner les limitations de requêtes par défaut.
+J'ai développé une fonction robuste get_tweets qui gère la pagination, filtre les doublons via un set() d'IDs, et interroge l'API Twitter v2.
+
 ```python
-# Extrait du script de collecte (ingest)
-def collect_tweets(query, max_results):
-    client = tweepy.Client(bearer_token=BEARER_TOKEN)
-    tweets = client.search_recent_tweets(
-        query=query, 
-        max_results=max_results, 
-        tweet_fields=['context_annotations', 'created_at']
-    )
-    # Logique de gestion des quotas et stockage CSV...
-    return tweets
+# Extrait de collect_tweets.py
+def get_tweets(keyword, max_results=10, lang='en', seen_ids=set()):
+    try:
+        response = client.search_recent_tweets(
+            query=f"{keyword} lang:{lang}",
+            max_results=max_results,
+            tweet_fields=['context_annotations', 'created_at'],
+            expansions=['author_id']
+        )
+        tweets = response.data
+        new_tweets = []
+        if tweets is not None:
+            for tweet in tweets:
+                # Déduplication basée sur l'ID du tweet
+                if tweet.id not in seen_ids:
+                    seen_ids.add(tweet.id)
+                    new_tweets.append(tweet)
+        return new_tweets
+    except tweepy.TweepyException as e:
+        print(f"Erreur API : {e}")
+        return []
 ```
 
 ### 2. Prétraitement et Assainissement (Data Sanitization)
-Les données textuelles brutes nécessitent un nettoyage rigoureux avant analyse. Utilisation d'expressions régulières (Regex) pour normaliser le contenu.
+Le nettoyage utilise des expressions régulières complexes pour supprimer le bruit (URLs, mentions) et NLTK pour la tokenisation.
+
 ```Python
-# Fonction de nettoyage (prepare)
+# Extrait de clean_tweets.py
 def clean_tweet(tweet):
-    # Suppression des URLs
-    tweet = re.sub(r'http\S+|www\S+|https\S+', '', tweet, flags=re.MULTILINE)
-    # Suppression des mentions @User et hashtags #
-    tweet = re.sub(r'\@\w+|\#', '', tweet)
+    # Suppression des URL
+    tweet = re.sub(r"http\S+|www\S+|https\S+", '', tweet, flags=re.MULTILINE)
+    # Suppression des mentions et hashtags
+    tweet = re.sub(r'@\w+|#', '', tweet)
+    # Suppression des caractères spéciaux
+    tweet = re.sub(r'[^A-Za-z0-9\s]+', '', tweet)
     return tweet
+
+# Filtrage intelligent multilingue (Français/Anglais)
+stop_words_fr = set(stopwords.words('french'))
+stop_words_en = set(stopwords.words('english'))
+combined_stop_words = stop_words_fr.union(stop_words_en)
 ```
 
-### 3. Analyse Distribuée avec Spark (NLP)
+### 3. Analyse Distribuée avec Spark - Azure Databricks 
 Pour passer à l'échelle sur de gros volumes, l'analyse de sentiment est encapsulée dans une Spark UDF (User Defined Function), permettant d'exécuter du code Python sur les nœuds du cluster Spark.
+
 ```Python
 # Application de l'analyse de sentiment sur DataFrame Spark
 from textblob import TextBlob
