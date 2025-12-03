@@ -61,8 +61,8 @@ graph TD
 ## 💻 Implémentation Data Engineering
 
 Les scripts complets sont disponibles dans ce dépôt : 
-- Code source : [03-Pipeline-Azure-Databricks-CICD/src]
-- Fichiers de configuration : [03-Pipeline-Azure-Databricks-CICD/config](./03-Pipeline-Azure-Databricks-CICD/config)
+- Code source : [src](./src)
+- Fichiers de configuration : [config](./config)
 
 ### 1. Ingestion de Données (Python & Tweepy)
 J'ai développé une fonction robuste get_tweets qui gère la pagination, filtre les doublons via un set() d'IDs, et interroge l'API Twitter v2.
