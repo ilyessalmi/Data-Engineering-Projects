@@ -60,9 +60,7 @@ graph TD
 
 ## 💻 Implémentation Data Engineering
 
-Les scripts complets sont disponibles dans ce dépôt : 
-- Code source : [src](./src)
-- Fichiers de configuration : [config](./config)
+Les scripts complets sont disponibles dans ce fichier : [src](./src)
 
 ### 1. Ingestion de Données (Python & Tweepy)
 J'ai développé une fonction robuste get_tweets qui gère la pagination, filtre les doublons via un set() d'IDs, et interroge l'API Twitter v2.
