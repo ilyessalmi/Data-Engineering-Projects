@@ -102,18 +102,19 @@ WHERE
 Ce projet a nécessité une configuration fine des ressources Azure pour assurer la sécurité et la maîtrise des coûts.
 
 ### 1. Configuration Infrastructure (IaC & Portail)
-Event Hubs : Création d'un Namespace dédié avec partitionnement pour paralléliser l'ingestion si le volume augmente.
-Synapse Analytics : Provisionnement d'un Pool SQL dédié (DW) pour stocker l'historique et permettre des requêtes analytiques complexes.
+* Event Hubs : Création d'un Namespace dédié avec partitionnement pour paralléliser l'ingestion si le volume augmente.
+* Synapse Analytics : Provisionnement d'un Pool SQL dédié (DW) pour stocker l'historique et permettre des requêtes analytiques complexes.
 
 ### 2. Monitoring & Alerting (Azure Monitor)
 En tant qu'Admin, j'ai mis en place une surveillance active pour réagir aux anomalies de marché sans regarder les écrans :
-Règle d'alerte 1 : Si Bitcoin Price > 70,000$ → Envoi Email Équipe Trading.
-Règle d'alerte 2 : Si Variation > 5% en 1h (Volatilité extrême) → Notification Critique.
+
+* Règle d'alerte 1 : Si Bitcoin Price > 70,000$ → Envoi Email Équipe Trading.
+* Règle d'alerte 2 : Si Variation > 5% en 1h (Volatilité extrême) → Notification Critique.
 
 ### 3. Gouvernance des Données (Azure Purview)
 Pour documenter ce flux de données, j'ai connecté Azure Purview au compte Synapse. Cela permet de :
-Scanner automatiquement le schéma des données.
-Créer un catalogue de données (Data Catalog) pour que les analystes retrouvent facilement les tables CryptoIndicators.
+* Scanner automatiquement le schéma des données.
+* Créer un catalogue de données (Data Catalog) pour que les analystes retrouvent facilement les tables CryptoIndicators.
 
 ## 🔧 Défis Techniques & Résolutions (Troubleshooting)
 ### 🔴 Problème 1 : Latence et "Backpressure"
@@ -131,6 +132,12 @@ Créer un catalogue de données (Data Catalog) pour que les analystes retrouvent
 
 
 ## 📸 Aperçu de la Solution
+### Azure function
+Azure Function déclenchée par un Timer Trigger pour interroger l'API CoinGecko
+
+![alt text](function_app.jpg)
+![alt text](function_app1.jpg)
+
 ### Configuration Event Hubs (Ingestion)
 Point d'entrée des données streaming.
 
