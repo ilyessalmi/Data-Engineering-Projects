@@ -16,4 +16,4 @@
 
 ### [Projet 4 : Analyse Streaming Temps Réel (Crypto) sur Azure](./04-RealTime-Crypto-Analysis-Azure)
 **Focus :** Architecture Cloud Native (PaaS), Serverless (Azure Functions), Event Hubs, Stream Analytics.
-*Architecture 100% Azure pour ingérer, traiter et visualiser des cours de cryptomonnaies en temps réel avec système d'alertes.*
+* Architecture 100% Azure pour ingérer, traiter et visualiser des cours de cryptomonnaies en temps réel avec système d'alertes.*
