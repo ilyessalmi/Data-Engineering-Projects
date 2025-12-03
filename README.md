@@ -1,15 +1,25 @@
-# Portfolio Technique : Data Engineering & Cloud Architecture
+# Portfolio Technique : Data Engineering & Cloud Azure
 
-👋 **Bonjour !**
+👋 **À propos de ce dépôt**
 
-Ce dépôt regroupe les projets techniques réalisés lors de ma formation intensive **Data Engineer**. Cette étape clé de ma reconversion professionnelle m'a permis de maîtriser les fondamentaux de la donnée et du développement avant de me spécialiser vers l'administration système et le Cloud.
+Ce dépôt archive les projets pratiques réalisés lors de mon bootcamp intensif (7 mois) chez *LePont*. Bien que cette formation visait le titre de Data Engineer (RNCP 7), elle a surtout été pour moi une opportunité d'apprendre à **naviguer dans l'écosystème Cloud Azure** et de me familiariser avec la logique de programmation.
 
-### 🎯 Mon Objectif
-Je transitionne aujourd'hui vers des rôles de **Cloud Support / Administrateur Système (Azure / Microsoft 365)**.
-Ces projets démontrent ma capacité à :
-*   **Comprendre** les infrastructures complexes (Hadoop, Spark, Azure PaaS).
-*   **Automatiser** des tâches et des déploiements (Scripting Python, CI/CD, Bash).
-*   **Administrer** des ressources cloud et résoudre des problèmes techniques (Troubleshooting).
+### 🎯 Mon Objectif : Cloud Support & Administration
+Aujourd'hui, je capitalise sur ce bagage technique pour m'orienter vers le **Support IT et l'Administration Cloud (Azure / M365)**.
+
+Ces projets ne sont pas une prétention au poste d'ingénieur de données, mais la preuve de ma capacité à :
+*   **Manipuler le portail Azure** (Création de ressources, gestion des coûts, monitoring).
+*   **Comprendre les environnements techniques** (Serveurs, Conteneurs Docker, Logs).
+*   **Apprendre vite** et appréhender des concepts complexes.
+
+### 🎓 Mes Certifications Actuelles
+Pour valider mes compétences en support et administration, j'ai obtenu :
+*   ✅ **Microsoft AZ-900** (Azure Fundamentals)
+*   ✅ **Microsoft MS-900** (Microsoft 365 Fundamentals)
+*   ✅ **Google IT Support Professional Certificate**
+*   ⏳ *Microsoft SC-900 (En cours)*
+
+---
 
 ---
 
