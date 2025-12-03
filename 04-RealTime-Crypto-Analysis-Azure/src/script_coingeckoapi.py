@@ -15,7 +15,7 @@ params = {
 }
 
 # Configuration de l'Event Hub
-connection_str = "Endpoint=sb://crypto-market-namespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ThbCJx4joW72u6EXIHJUcWhOTKYldHEF++AEhN8zrqQ="
+connection_str = "Endpoint=sb://crypto-market-namespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ThbCJx4ooW72u5EXIHJUcWlOTKYldHEF++AEhN8zrqQ="
 event_hub_name = "crypto-market-data"
 
 # Fonction pour envoyer les données à Event Hub
@@ -43,5 +43,6 @@ def send_data_to_event_hub():
 for _ in range(10):
     send_data_to_event_hub()
     time.sleep(2 * 60)  # Temporisation de 2 minutes (120 secondes)
+
 
 print("Finished sending data 10 times.")
