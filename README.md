@@ -1,4 +1,17 @@
-# Data-Engineering-Projects
+# Portfolio Technique : Data Engineering & Cloud Architecture
+
+👋 **Bonjour !**
+
+Ce dépôt regroupe les projets techniques réalisés lors de ma formation intensive **Data Engineer**. Cette étape clé de ma reconversion professionnelle m'a permis de maîtriser les fondamentaux de la donnée et du développement avant de me spécialiser vers l'administration système et le Cloud.
+
+### 🎯 Mon Objectif
+Je transitionne aujourd'hui vers des rôles de **Cloud Support / Administrateur Système (Azure / Microsoft 365)**.
+Ces projets démontrent ma capacité à :
+*   **Comprendre** les infrastructures complexes (Hadoop, Spark, Azure PaaS).
+*   **Automatiser** des tâches et des déploiements (Scripting Python, CI/CD, Bash).
+*   **Administrer** des ressources cloud et résoudre des problèmes techniques (Troubleshooting).
+
+---
 
 ## Liste des Projets
 
