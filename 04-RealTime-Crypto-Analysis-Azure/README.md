@@ -156,44 +156,44 @@ Pour documenter ce flux de données, j'ai connecté Azure Purview au compte Syna
 ### Architecture de la Solution
 Vue détaillée de l'architecture Azure
 
-![alt text](azure-architecture.png)
+![alt text](img/azure-architecture.png)
 
 
 ### Azure function
 Azure Function déclenchée par un Timer Trigger pour interroger l'API CoinGecko
 
-![alt text](function_app.jpg)
-![alt text](function_app1.jpg)
+![alt text](img/function_app.jpg)
+![alt text](img/azure_function_app.jpg)
 
 
 ### Configuration Event Hubs (Ingestion)
 Point d'entrée des données streaming.
 
-![alt text](eventhub-config.png)
+![alt text](img/eventhub-config.png)
 
 
 ### Logique de Traitement (Stream Analytics)
 Requête SQL temps réel directement dans le portail Azure.
 
-![alt text](stream-analytics-query.png)
+![alt text](img/stream-analytics-query.png)
 
 
 ### Visualisation Power BI
 Comparaison temps réel Bitcoin vs Ethereum et moyennes mobiles.
 
-![alt text](powerbi-crypto.png)
+![alt text](img/powerbi-crypto.png)
 
 
 ### Système d'Alerte
 Configuration des seuils critiques dans Azure Monitor.
 
-![alt text](azure-monitor-alert.png)
+![alt text](img/azure-monitor-alert.png)
 
 
 ###  Gouvernance des Données - Data Catalog
 Azure Purview (Data Catalog) a été configuré pour scanner et cataloguer les données.
 
-![alt text](Azure_purview.png)
+![alt text](img/Azure_purview.png)
 
 ---
 
