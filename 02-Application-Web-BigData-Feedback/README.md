@@ -115,7 +115,7 @@ En tant qu'administrateur de cette stack, j'ai dû résoudre plusieurs incidents
 
 ## 📸 Aperçu de l'Infrastructure
 ### 1. Interface Web Utilisateur
-Le point d'entrée pour les utilisateurs.
+Le point d'entrée pour les utilisateurs ( application web Flask)
 
 ![alt text](web-interface.jpg)
 
