@@ -1,6 +1,5 @@
-##  Hive table creation and data loading scripts ##
 
--- Create external Hive table for feedbacks
+-- Créer une table externe Hive pour les retours de formation
 CREATE EXTERNAL TABLE feedbacks (
   id INT,
   bootcamp STRING,
@@ -15,42 +14,40 @@ LINES TERMINATED BY '\n'
 STORED AS TEXTFILE
 LOCATION '/user/hdfs/feedbacks/';
 
--- Load data from HDFS into the feedbacks table
--- Run this command in Hive CLI after uploading your CSV file
+-- Charger les données depuis HDFS dans la table feedbacks
+-- Exécuter cette commande dans la CLI Hive après avoir uploadé votre fichier CSV
 -- LOAD DATA INPATH '/feedbacks/temp_feedback.csv' INTO TABLE feedbacks;
 
 ----------------------------------------------------------------------------------
 
-## Analytical queries for feedback analysis ##
-  
--- Calculate average rating per bootcamp
+-- Calculer la note moyenne par bootcamp
 SELECT bootcamp, AVG(rating) AS moyenne
 FROM feedbacks
 GROUP BY bootcamp;
 
--- Find the longest comment for each feedback type
+-- Trouver le commentaire le plus long pour chaque type de feedback
 SELECT feedback_type, MAX(LENGTH(comment)) AS longueur_max_commentaire
 FROM feedbacks
 GROUP BY feedback_type;
 
--- Count feedbacks per bootcamp and per month
+-- Compter le nombre de feedbacks par bootcamp et par mois
 SELECT bootcamp, MONTH(date) AS mois, COUNT(*) AS nombre_feedbacks
 FROM feedbacks
 GROUP BY bootcamp, MONTH(date);
 
--- Find bootcamps with average rating below 5
+-- Trouver les bootcamps ayant une note moyenne inférieure à 5
 SELECT bootcamp, AVG(rating) AS moyenne
 FROM feedbacks
 GROUP BY bootcamp
 HAVING AVG(rating) < 5;
 
--- Get the 5 feedbacks with the highest ratings
+-- Récupérer les feedbacks ayant les 5 notes les plus élevées
 SELECT *
 FROM feedbacks
 ORDER BY rating DESC
 LIMIT 5;
 
--- Find the most recent feedback for each bootcamp and feedback type combination
+-- Trouver le feedback le plus récent pour chaque combinaison de bootcamp et de type de feedback
 SELECT f.bootcamp, f.feedback_type, f.date, f.rating, f.comment
 FROM feedbacks f
 JOIN (
@@ -60,7 +57,7 @@ JOIN (
 ) m 
 ON f.bootcamp = m.bootcamp AND f.feedback_type = m.feedback_type AND f.date = m.max_date;
 
--- Calculate rating distribution by feedback type
+-- Calculer la répartition des notes par type de feedback
 SELECT feedback_type, 
        COUNT(CASE WHEN rating = 1 THEN 1 END) AS note_1,
        COUNT(CASE WHEN rating = 2 THEN 1 END) AS note_2,
