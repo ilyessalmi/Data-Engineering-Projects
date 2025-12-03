@@ -9,3 +9,7 @@
 ### [Projet 2 : Application Web & Pipeline Big Data](./02-Application-Web-BigData-Feedback)
 **Focus :** Intégration Système, Docker, Hadoop, Troubleshooting.
 * Déploiement d'une stack complète (Web + Big Data) avec gestion des flux de données, conteneurisation Docker et résolution d'incidents d'infrastructure.*
+
+### [Projet 3 : Pipeline ETL End-to-End & DevOps sur Azure Databricks](./03-Pipeline-Azure-Databricks-CICD)
+**Focus :** Data Engineering (Python/Spark), NLP, Administration Azure, CI/CD.
+* Conception d'un pipeline complet : ingestion API Twitter, traitement distribué (Spark NLP) et automatisation du déploiement via GitLab CI/CD.*
