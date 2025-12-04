@@ -1,15 +1,17 @@
-# Portfolio Technique : Data Engineering & Cloud Azure
+# Portfolio Technique : Data Engineering & Infrastructure Azure
 
 👋 **À propos de ce dépôt**
 
-Ce dépôt archive les projets pratiques réalisés lors de mon bootcamp intensif (7 mois) chez *LePont*. Bien que cette formation visait le titre de Data Engineer (RNCP 7), elle a surtout été pour moi une opportunité d'apprendre à **naviguer dans l'écosystème Cloud Azure** et de me familiariser avec la logique de programmation.
+Ce dépôt regroupe les projets techniques réalisés dans le cadre de ma formation intensive **Data Engineer** chez *LePont / PMN* (7 mois). Ce cursus m'a permis de valider un **Titre RNCP Niveau 7 (équivalent Bac+5)**.
 
-### 🎯 Mon Objectif : Cloud Support & Administration
-Aujourd'hui, je capitalise sur ce bagage technique pour m'orienter vers le **Support IT et l'Administration Cloud (Azure / M365)**.
 
-Ces projets ne sont pas une prétention au poste d'ingénieur de données, mais la preuve de ma capacité à :
-*   **Manipuler le portail Azure** (Création de ressources, gestion des coûts, monitoring).
-*   **Comprendre les environnements techniques** (Serveurs, Conteneurs Docker, Logs).
+### 🎯 Mon Positionnement : Cloud Support & Administration
+Je m'oriente aujourd'hui prioritairement vers les métiers du **Cloud Support / Administrateur Système (Azure / Microsoft 365)**.
+
+Ces projets démontrent ma capacité à :
+*   **Comprendre** les infrastructures complexes (Hadoop, Spark, Azure PaaS).
+*   **Automatiser** des tâches et des déploiements (Scripting Python, CI/CD, Bash).
+*   **Administrer** des ressources cloud et résoudre des problèmes techniques (Troubleshooting).
 *   **Apprendre vite** et appréhender des concepts complexes.
 
 
@@ -32,3 +34,9 @@ Ces projets ne sont pas une prétention au poste d'ingénieur de données, mais 
 ### [Projet 4 : Analyse Streaming Temps Réel (Crypto) sur Azure](./04-RealTime-Crypto-Analysis-Azure)
 **Focus :** Architecture Cloud Native (PaaS), Serverless (Azure Functions), Event Hubs, Stream Analytics.
 * Architecture 100% Azure pour ingérer, traiter et visualiser des cours de cryptomonnaies en temps réel avec système d'alertes.*
+
+
+---
+
+> 💡 **Note :** Pour consulter mes projets spécifiques à l'administration Microsoft 365/Azure, visitez mon dépôt dédié :  
+> **[📂 my-it-portfolio](https://github.com/ilyessalmi/my-it-portfolio)**
