@@ -12,14 +12,6 @@ Ces projets ne sont pas une prétention au poste d'ingénieur de données, mais 
 *   **Comprendre les environnements techniques** (Serveurs, Conteneurs Docker, Logs).
 *   **Apprendre vite** et appréhender des concepts complexes.
 
-### 🎓 Mes Certifications Actuelles
-Pour valider mes compétences en support et administration, j'ai obtenu :
-*   ✅ **Microsoft AZ-900** (Azure Fundamentals)
-*   ✅ **Microsoft MS-900** (Microsoft 365 Fundamentals)
-*   ✅ **Google IT Support Professional Certificate**
-*   ⏳ *Microsoft SC-900 (En cours)*
-
----
 
 ---
 
