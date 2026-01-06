@@ -39,4 +39,4 @@ Ces projets démontrent ma capacité à :
 ---
 
 > 💡 **Note :** Pour consulter mes projets spécifiques à l'administration Microsoft 365/Azure, visitez mon dépôt dédié :  
-> **[📂 my-it-portfolio](https://github.com/ilyessalmi/my-it-portfolio)**
+> **[📂 my-it-portfolio](https://github.com/ilyessalmi/my-it-portfolio/README.md)**
